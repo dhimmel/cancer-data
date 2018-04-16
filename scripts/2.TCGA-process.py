@@ -133,6 +133,9 @@ clinmat_df.race = clinmat_df.race.str.title()
 clinmat_df = clinmat_df.assign(sample_type = clinmat_df.sample_id.str[-2:])
 clinmat_df.sample_type = clinmat_df.sample_type.replace(sampletype_codes_dict)
 
+# Create mapping of sample_id to cancer type (acronym)
+sample_to_acronym = dict(zip(clinmat_df.sample_id, clinmat_df.acronym))
+
 
 # In[8]:
 
@@ -457,8 +460,6 @@ y_gene_df.head(2)
 
 # In[36]:
 
-
-sample_to_acronym = dict(zip(clinmat_df.sample_id, clinmat_df.acronym))
 
 def get_cancer_count_column(sample_ids):
     """
